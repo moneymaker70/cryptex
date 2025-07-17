@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptex - Risikofreie Krypto-Investments mit garantierten Renditen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.95);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-secondary {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: transparent;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 18px 40px;
+            background: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,107,107,0.6);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 5px 15px rgba(255,107,107,0.4); }
+            50% { box-shadow: 0 5px 25px rgba(255,107,107,0.8); }
+            100% { box-shadow: 0 5px 15px rgba(255,107,107,0.4); }
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            background: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        /* Plans Section */
+        .plans {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .plan-card.popular {
+            border: 3px solid #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff6b6b;
+            color: white;
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .plan-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .plan-duration {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .plan-features li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .sold-out {
+            background: #ccc !important;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        /* Steps Section */
+        .steps {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            padding: 25px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            padding: 25px;
+            display: none;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .trust-badges {
+                gap: 20px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-card.popular {
+                transform: none;
+            }
+        }
+
+        .urgency {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        /* Registration Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal p {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .register-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .register-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .security-note {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- Urgency Bar -->
+    <div class="urgency">
+        🔥 36-Monats-Plan AUSVERKAUFT! Nur noch begrenzte Plätze für 5 & 7 Jahre verfügbar!
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">CRYPTEX</div>
+            <div class="nav-buttons">
+                <a href="https://cryptex.to/" class="btn-secondary" target="_blank">Login</a>
+                <a href="#" class="btn-secondary" onclick="openModal()">Konto eröffnen</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>🚀 Jetzt kostenloses Cryptex Konto eröffnen</h2>
+            <p>Starten Sie noch heute mit risikofreien Krypto-Investments!</p>
+
+            <a href="https://bit.ly/3kvcVNM" class="register-btn" target="_blank" onclick="trackRegistration()">
+                ✨ Kostenloses Konto erstellen
+            </a>
+
+            <div class="security-note">
+                🔒 <strong>100% sicher:</strong> Ihre Daten werden verschlüsselt übertragen und sind durch unsere Datenschutzrichtlinien geschützt. Keine versteckten Kosten oder Verpflichtungen.
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Risikofreie Krypto-Investments mit garantierten Renditen</h1>
+            <p>Weltweit erstes DeFi Hybrid Contract System - Bis zu 84 Monate Staking mit täglichen Auszahlungen. Keine Vorkenntnisse nötig!</p>
+            <a href="#" class="btn-primary" onclick="openModal()">Jetzt kostenloses Konto eröffnen</a>
+
+            <div class="trust-badges">
+                <div class="badge">🛡️ 100% Geld-zurück-Garantie</div>
+                <div class="badge">💰 $43.200 USD abgesichert</div>
+                <div class="badge">🔒 Keine versteckten Gebühren</div>
+                <div class="badge">⚡ Jederzeit kündbar</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Warum Cryptex einzigartig ist</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Weltweit erstes risikofreies Investment</h3>
+                    <p>Maximales Wachstum mit minimalem Aufwand und null Risiko. Revolutionäre DeFi-Technologie.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Cryptex stellt Liquidität bereit</h3>
+                    <p>Keine eigenen Mittel erforderlich. Wir stellen $43.200 USD pro Contract zur Verfügung.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>100% Privatsphäre & Sicherheit</h3>
+                    <p>Höchste Sicherheitsstandards und vollständiger Schutz Ihrer Daten. Garantiert!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Wie kostenloses Mining</h3>
+                    <p>DeFi Hybrid Contract funktioniert wie kostenlose Mining-Hardware mit gratis Strom.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>100% Transparent</h3>
+                    <p>Keine versteckten Gebühren oder Kosten. Cryptex eliminiert Zwischenhändler.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Weltbestes Empfehlungsprogramm</h3>
+                    <p>Verdienen Sie bis zu 20 Levels tief. Unbegrenzte Verdienstmöglichkeiten.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="plans">
+        <div class="container">
+            <h2 class="section-title">Wählen Sie Ihren DeFi Hybrid Contract</h2>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <h3 class="plan-title">STARTER</h3>
+                    <div class="plan-duration">3 Jahre Staking</div>
+                    <div class="plan-price">AUSVERKAUFT</div>
+                    <ul class="plan-features">
+                        <li>$43.200 USD Liquidität bereitgestellt</li>
+                        <li>36 Monate Laufzeit</li>
+                        <li>Tägliche Auszahlungen</li>
+                        <li>Jederzeit kündbar</li>
+                        <li>100% Geld-zurück-Garantie</li>
+                    </ul>
+                    <a href="#" class="btn-primary sold-out">Ausverkauft</a>
+                </div>
+
+                <div class="plan-card popular">
+                    <div class="popular-badge">BELIEBT</div>
+                    <h3 class="plan-title">PREMIUM</h3>
+                    <div class="plan-duration">5 Jahre Staking</div>
+                    <div class="plan-price">$100<span style="font-size:1rem">/Bearbeitungsgebühr</span></div>
+                    <ul class="plan-features">
+                        <li>$43.200 USD Liquidität bereitgestellt</li>
+                        <li>60 Monate Laufzeit</li>
+                        <li>Höhere tägliche Renditen</li>
+                        <li>Jederzeit kündbar</li>
+                        <li>100% Geld-zurück-Garantie</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <a href="#" class="btn-primary" onclick="openModal()">Jetzt sichern</a>
+                </div>
+
+                <div class="plan-card">
+                    <h3 class="plan-title">ELITE</h3>
+                    <div class="plan-duration">7 Jahre Staking</div>
+                    <div class="plan-price">$100<span style="font-size:1rem">/Bearbeitungsgebühr</span></div>
+                    <ul class="plan-features">
+                        <li>$43.200 USD Liquidität bereitgestellt</li>
+                        <li>84 Monate Laufzeit</li>
+                        <li>Maximale tägliche Renditen</li>
+                        <li>Jederzeit kündbar</li>
+                        <li>100% Geld-zurück-Garantie</li>
+                        <li>VIP Support & Beratung</li>
+                        <li>Exklusive Boni</li>
+                    </ul>
+                    <a href="#" class="btn-primary" onclick="openModal()">Jetzt sichern</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section class="steps">
+        <div class="container">
+            <h2 class="section-title">So einfach geht's</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Kostenloses Konto eröffnen</h3>
+                    <p>Registrierung in 2 Minuten. E-Mail bestätigen und loslegen.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Contract auswählen</h3>
+                    <p>Wählen Sie zwischen 5 oder 7 Jahren Laufzeit für optimale Renditen.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Tägliche Gewinne genießen</h3>
+                    <p>Lehnen Sie sich zurück und erhalten Sie täglich passive Einkünfte.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Häufig gestellte Fragen</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Wie sicher ist mein Investment? 🔒
+                </div>
+                <div class="faq-answer">
+                    Ihr Investment ist durch eine Lebensversicherung in Höhe von $43.200 USD abgesichert. Zusätzlich bieten wir eine 100% Geld-zurück-Garantie falls Ihre Bewerbung abgelehnt wird.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Wann erhalte ich meine erste Auszahlung? 💰
+                </div>
+                <div class="faq-answer">
+                    Auszahlungen erfolgen täglich 24/7. Nach Aktivierung Ihres Contracts erhalten Sie bereits am nächsten Tag Ihre ersten Gewinne.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Kann ich vorzeitig kündigen? ⚡
+                </div>
+                <div class="faq-answer">
+                    Ja, Sie können Ihren Contract jederzeit ohne Strafgebühren kündigen. Ihre Flexibilität steht bei uns an erster Stelle.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Brauche ich Vorkenntnisse? 🎓
+                </div>
+                <div class="faq-answer">
+                    Nein! Unser System ist so einfach wie A-B-C. Keine technischen Kenntnisse oder Krypto-Erfahrung erforderlich.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Bereit für risikofreie Krypto-Gewinne?</h2>
+            <p>Schließen Sie sich bereits über 10.000 zufriedenen Investoren an!</p>
+            <a href="#" class="btn-primary" onclick="openModal()">Kostenloses Konto eröffnen</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Cryptex. Alle Rechte vorbehalten. | <a href="#" style="color: #667eea;">Datenschutz</a> | <a href="#" style="color: #667eea;">AGB</a> | <a href="#" style="color: #667eea;">Support</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Modal Functions
+        function openModal() {
+            document.getElementById('registrationModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('registrationModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('registrationModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Track registration clicks
+        function trackRegistration() {
+            console.log('Registration link clicked');
+            // Here you can add analytics tracking
+            setTimeout(() => {
+                closeModal();
+            }, 1000);
+        }
+
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const isOpen = answer.style.display === 'block';
+
+            // Close all FAQ answers
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.style.display = 'none';
+            });
+
+            // Open clicked FAQ if it wasn't already open
+            if (!isOpen) {
+                answer.style.display = 'block';
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255,255,255,0.98)';
+            } else {
+                header.style.background = 'rgba(255,255,255,0.95)';
+            }
+        });
+
+        // Auto-open modal after 30 seconds (optional)
+        setTimeout(() => {
+            if (!localStorage.getItem('modalShown')) {
+                openModal();
+                localStorage.setItem('modalShown', 'true');
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
